@@ -1,0 +1,30 @@
+package lw01.prelab;
+
+import java.util.Scanner;
+import java.util.ArrayList;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc=new Scanner (Main.class.getResourceAsStream("jobs.txt"));
+        
+        ArrayList<PrintJob> jobs = new ArrayList<>();
+        
+        while (sc.hasNextLine()) {
+            String type=sc.next();
+            String id=sc.next();
+            int pages=sc.nextInt();
+
+            if (type.equals("MONO")) {
+                jobs.add(new MonoPrint(id, pages));
+            } else if (type.equals("COLOUR")) {
+                jobs.add(new ColourPrint(id, pages));
+            }
+        }
+
+        sc.close();
+
+        for (PrintJob job:jobs) {
+            System.out.println(job.summary());
+        }
+    }
+    
+}
